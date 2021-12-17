@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  jwtuserapi:
+    image: jwt.jar
+    ports:
+      - "9070:9070"
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url"  : "jdbc:mysql://mysql:3306/tpodd",
+        "spring.datasource.username" : "yacine",
+        "spring.datasource.password" : "apple",
+        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
+        "spring.jpa.hibernate.ddl-auto" : "update"
+      }'
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tpodd
+      MYSQL_USER: yacine
+      MYSQL_PASSWORD: apple
+    ports:
+      - "3306:3306"
+

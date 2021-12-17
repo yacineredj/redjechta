@@ -1,0 +1,18 @@
+
+server:
+  port: ${APP_PORT:9070}
+
+management:
+  health:
+    show-details: always
+  metrics:
+    enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: info, health, metrics
+    
+security:
+  require-ssl: false
+  basic:
+    enabled: false
